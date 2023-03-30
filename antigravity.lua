@@ -69,11 +69,7 @@ pcall(function()
     local cframep = Vector3.new(0, 0, 0)
     task.spawn(function()
         c1 = game:GetService("RunService").Heartbeat:Connect(function(dt)
-            if not chr then
-                chr = plr.CharacterAdded:Wait()
-                repeat task.wait()
-                until hum
-            end
+            if not chr then return end
             if not _G.spaceFly or proc then return end
             cframe = hrp.CFrame
             cframep = cframe.p
@@ -128,7 +124,10 @@ pcall(function()
             end
         end)
 
-        c3 = game.Players.LocalPlayer.CharacterAdded:Connect(function(chr)
+        c3 = plr.CharacterAdded:Connect(function(_chr)
+            chr = _chr
+            hrp = chr:WaitForChild("HumanoidRootPart")
+            hum = chr:WaitForChild("Humanoid")
             disable()
         end)
 
