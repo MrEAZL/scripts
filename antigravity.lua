@@ -26,14 +26,14 @@ if not _G.spaceFlyM then
     local on
     oi = hookmetamethod(game, "__index", function(...)
         local p = {...}
-        if p[1] and p[1] == workspace and p2[2] and p[2] == "Gravity" then
+        if p and p[1] and p[1] == workspace and p2[2] and p[2] == "Gravity" then
             return og
         end
         return oi(...)
     end)
     on = hookmetamethod(game, "__newindex", function(...)
         local p = {...}
-        if p[1] and p[1] == workspace and p[2] and p[2] == "Gravity" and not checkcaller() then
+        if p and p[1] and p[1] == workspace and p[2] and p[2] == "Gravity" and not checkcaller() then
             return on(p[1], p[2], og)
         end
         return on(...)
